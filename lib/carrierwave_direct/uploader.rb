@@ -10,7 +10,7 @@ module CarrierWaveDirect
     included do
       storage :fog
 
-      attr_accessor :success_action_redirect
+      attr_accessor :success_action_status
 
       fog_credentials.keys.each do |key|
         define_method(key) do
@@ -74,7 +74,7 @@ module CarrierWaveDirect
           'conditions' => conditions + [
             {"bucket" => fog_directory},
             {"acl" => acl},
-            {"success_action_redirect" => success_action_redirect},
+            {"success_action_status" => success_action_status},
             ["content-length-range", options[:min_file_size], options[:max_file_size]]
           ]
         }.to_json
